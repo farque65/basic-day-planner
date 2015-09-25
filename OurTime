@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class OurTime {
+
+	// Data fields
+	private int hour;
+	private int minutes;
+
+	// Default constructor
+	public OurTime() {
+		hour = 0;
+		minutes = 0;
+	}
+
+	// Initial constructor
+	public OurTime(int h, int m, int s) {
+		hour = h;
+		minutes = m;
+	}
+
+	// get Hours
+	public int getHour() {
+		return hour;
+	}
+
+	// get Minutes
+	public int getMinutes() {
+		return minutes;
+	}
+
+	// This method sets the Hours from user input
+	public void setHourFromUser() {
+		System.out.print("Enter hour: ");
+		Scanner input = new Scanner(System.in);
+		hour = input.nextInt();
+
+		while (hour < 0 || hour > 25) {
+			System.out.print("\nInvalid - enter hour between 1 and 24: ");
+			hour = input.nextInt();
+		}
+		;
+	}
+
+	// This method sets the Minutes from user input
+	public void setMinutesFromUser() {
+		System.out.print("Enter minutes: ");
+		Scanner input = new Scanner(System.in);
+		minutes = input.nextInt();
+
+		while (minutes < -1 || minutes > 59) {
+			System.out.print("\nInvalid - enter minute between 0 and 59: ");
+			minutes = input.nextInt();
+		}
+		;
+	}
+
+	// This display method displays hour:minutes:seconds in that form
+	public void display() {
+		System.out.print(hour + ":" + minutes);
+	}
+
+}// end of OurTime class
