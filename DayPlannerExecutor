@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class Assign4 {
+
+	public static void main(String[] args) {
+
+		Scanner input = new Scanner(System.in);
+		Planner planner = new Planner();
+		int menuChoice = 0;
+		
+		//do method that runs the menu giving the user options list and a place to enter their choice
+		do {
+
+			System.out.println("\n1. to add an activity to planner");
+			System.out.println("2. to display activities for a day");
+			System.out.println("3. to display activities for a week");
+			System.out.println("4. to delete an activity ");
+			System.out.println("0 to quit");
+			System.out.print("\nEnter choice: ");
+			menuChoice = input.nextInt();
+			System.out.print("\n");
+
+			if (menuChoice == 1) {
+
+				planner.addEvent();
+
+			} else if (menuChoice == 2) {
+
+				OurDate dateDisplay = new OurDate();
+
+				System.out.println("Enter date to display: ");
+
+				dateDisplay.setMonthFromUser();
+				dateDisplay.setDayFromUser();
+				dateDisplay.setYearFromUser();
+
+				planner.display(dateDisplay);
+
+			} else if (menuChoice == 3) {
+
+				OurDate dateDisplay = new OurDate();
+
+				System.out.println("Enter beginning date of week you want to display: \n");
+
+				dateDisplay.setMonthFromUser();
+				dateDisplay.setDayFromUser();
+				dateDisplay.setYearFromUser();
+
+				planner.displayOneWeek(dateDisplay);
+
+			} else if (menuChoice == 4) {
+
+				planner.deleteEvent();
+
+			} 
+
+		} while (menuChoice != 0);
+
+	}// end of main method
+
+}// end of assign 4
