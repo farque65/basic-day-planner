@@ -1,0 +1,142 @@
+import java.util.Scanner;
+
+public class Planner {
+	
+	//Data fields
+	private Event[] activities;
+	private int numEvents;
+
+	//Default Constructor
+	public Planner() {
+
+		activities = new Event[1000];
+		numEvents = 0;
+
+	}
+	
+	//This method looks through the array after it gets the input from the user. 
+	//If the input matches an entry in the array based on time and date it creates
+	//a new event in its place, essentially deleting the event.
+	public void deleteEvent() {
+
+		Event event = new Event();
+
+		event.setDateFromUser();
+		System.out.print("\n");
+
+		event.setTimeFromUser();
+
+		System.out.print("\n");
+
+		for (int i = 0; i < numEvents; i++) {
+
+			if (activities[i].isEqual(event.date())
+					&& activities[i].isEqualTime(event.time())) {
+
+				activities[i] = new Event();
+
+			}
+
+		}
+
+	}// end of delete event
+
+	
+	
+	//This method looks through the array after it gets the input from the user. 
+	//If the input matches an entry in the array based on time and date it returns
+	//and invalid entry method. If there is no entry with the same date and time
+	//it adds the event to the activities array.
+	public void addEvent() {
+
+		Event event = new Event();
+
+		event.setDateFromUser();
+		System.out.print("\n");
+
+		event.setTimeFromUser();
+		System.out.print("\n");
+
+		event.setDescriptionFromUser();
+
+		int i = 0;
+		
+		if (activities[i] == null && numEvents == 0) {
+			activities[numEvents] = event;
+			numEvents++;
+		} else {
+			while (i < numEvents || numEvents == 0) {
+
+				if (activities[i].isEqual(event.date())
+						&& activities[i].isEqualTime(event.time())
+						|| activities[i] == null) {
+
+					System.out.println("You already have an activity for that date and time...cannot be entered ");
+
+				} else {
+
+					activities[numEvents] = event;
+					numEvents++;
+					break;
+				}
+				i++;
+			}
+			;
+		}
+
+	}// end of addEvent method
+	
+	
+	
+	//This displays all the event entries for one week from the entered for that are in the activities array 
+	public void displayOneWeek(OurDate dateToDisplay) {
+
+		System.out.print("\nYour activities for the week starting ");
+		dateToDisplay.display();
+		System.out.println("are:");
+
+		for (int count = 0; count < 7; count++) {
+			System.out.print("\nYour activities for ");
+			dateToDisplay.display();
+			System.out.println("are:");
+			oneWeekDisplayHelper(dateToDisplay);
+			dateToDisplay.addOne();
+		}
+
+	}// end of displayOneWeek method
+	
+	//This method is the same as the display method however it is created to give display values for 
+	//the displayOneWeek method that are not formatted like the display method is
+	public void oneWeekDisplayHelper(OurDate dateToDisplay) {
+
+		for (int i = 0; i < numEvents; i++) {
+
+			if (activities[i].isEqual(dateToDisplay)) {
+
+				activities[i].display();
+			}
+
+		}
+
+	}// end of oneWeekDisplayHelper method
+	
+	
+	////This displays all the event entries for the day in the activities array
+	public void display(OurDate dateToDisplay) {
+
+		System.out.print("\nYour activities for ");
+		dateToDisplay.display();
+		System.out.println("are:");
+
+		for (int i = 0; i < numEvents; i++) {
+
+			if (activities[i].isEqual(dateToDisplay)) {
+
+				activities[i].display();
+			}
+
+		}
+
+	}// end of display method
+
+}// end of Planner 
