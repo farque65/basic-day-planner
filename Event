@@ -1,0 +1,124 @@
+import java.util.Scanner;
+
+public class Event {
+
+	// Data fields
+	private OurDate date;
+	private OurTime time;
+	private String description;
+
+	// default constructor
+	public Event() {
+		date = new OurDate();
+		time = new OurTime();
+		description = new String();
+	}
+
+	// get date method
+	public OurDate date() {
+		return date;
+	}
+
+	// get time method
+	public OurTime time() {
+		return time;
+	}
+
+	// get description
+	public String description() {
+		return description;
+	}
+
+	// set date from user using methods from the OurDate class
+	public void setDateFromUser() {
+
+		date.setMonthFromUser();
+		date.setDayFromUser();
+		date.setYearFromUser();
+
+	}
+
+	// set time from user using methods from the OurTime class
+	public void setTimeFromUser() {
+		time.setHourFromUser();
+		time.setMinutesFromUser();
+	}
+
+	// set description from user input
+	public void setDescriptionFromUser() {
+		System.out.print("Enter event description: ");
+		Scanner input = new Scanner(System.in);
+		description = input.nextLine();
+	}
+
+	// This method displays the event date, event time and description
+	public void display() {
+
+		System.out.print("\n      ");
+		date.display();
+		time.display();
+		System.out.print(" " + description + " ");
+		System.out.print("\n");
+	}
+
+	// This method displays the difference in days between today(which is the
+	// parameter) and the event day.
+	// Then tells you if the event has happened or how long until it happens
+	public void displayDays(OurDate todayDate) {
+
+		int differenceOfDays = date.calcDays() - todayDate.calcDays();
+
+		if (differenceOfDays > 0) {
+			System.out.println("\nThe number of days until event is : "
+					+ differenceOfDays);
+		} else if (differenceOfDays == 0) {
+			System.out.println("\nThe event is today");
+		} else {
+
+			if (differenceOfDays == -1) {
+				differenceOfDays = differenceOfDays * -1;
+				System.out.println("\nThis event has already occured "
+						+ differenceOfDays + " day ago.");
+			} else {
+				differenceOfDays = differenceOfDays * -1;
+				System.out.println("\nThis event has already occured "
+						+ differenceOfDays + " days ago.");
+
+			}
+
+		}// end of if statement
+
+	}// end of displayDays method
+	
+	
+	//This method checks to see if date.calcDays is equal to dateToDisplay.calcDays then returns a boolean value
+	public boolean isEqual(OurDate dateToDisplay) {
+
+		if (date.calcDays() == dateToDisplay.calcDays()) {
+
+			return true;
+
+		} else {
+			return false;
+
+		}
+
+	}// end of isEqual
+	
+	
+	//This method checks to see if hour and time of a value in the array is equal to the input given
+	public boolean isEqualTime(OurTime timeToDisplay) {
+
+		if (time.getHour() == timeToDisplay.getHour()
+				&& timeToDisplay.getMinutes() == time.getMinutes()) {
+
+			return true;
+
+		} else {
+			return false;
+
+		}
+
+	}// end of isEqualTime
+
+}// end of Event class
