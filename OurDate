@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class OurDate {
+
+	// Data fields
+	private int month;
+	private int day;
+	private int year;
+
+	// Default constructor
+	public OurDate() {
+		month = 0;
+		day = 0;
+		year = 0;
+	}
+
+	// Initial constructor
+	public OurDate(int m, int d, int y) {
+		month = m;
+		day = d;
+		year = y;
+	}
+
+	// get Day method
+	public int getDay() {
+		return day;
+	}
+
+	// get Month method
+	public int getMonth() {
+		return month;
+	}
+
+	// get Year method
+	public int getYear() {
+		return year;
+	}
+
+	// set Month from user method
+	public void setMonthFromUser() {
+
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter a month(1-12): ");
+		month = input.nextInt();
+
+		while (month > 12 || month < 1) {
+			System.out.print("\nInvalid - enter month between 1 and 12: ");
+			month = input.nextInt();
+		}
+		;
+
+	}
+
+	// set Day from user method
+	public void setDayFromUser() {
+		Scanner input = new Scanner(System.in);
+		int[] monthArrays = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31,
+				30, 31 };
+
+		System.out.print("Enter a day (1-31): ");
+		day = input.nextInt();
+
+		while (day < 0 || day > monthArrays[month - 1]) {
+			System.out.print("\nInvalid - enter day between 1 and "
+					+ monthArrays[month - 1] + ": ");
+			day = input.nextInt();
+		}
+		;
+	}
+
+	// set Year from user method
+	public void setYearFromUser() {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter the year: ");
+		year = input.nextInt();
+
+		while (year <= 2014) {
+			System.out.print("\nInvalid - enter year 2015 or greater: ");
+			year = input.nextInt();
+		}
+	}
+
+	// calculate the days method from given user month, year and days
+	public int calcDays() {
+
+		return (year - 1) * 365 + (month - 1) * 30 + (day - 1);
+	}
+
+	// displays the month/day/year
+	public void display() {
+		System.out.print(month + "/" + day + "/" + year + "  ");
+	}// end of display
+
+	public void addOne() {
+
+		int[] monthArrays = new int[] { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31,
+				30, 31 };
+
+		if (month == 12 && day == 31) {
+			year++;
+			month = 1;
+			day = 1;
+		} else if (day == monthArrays[month - 1]) {
+			month++;
+			day = 1;
+		} else {
+			day++;
+		}
+
+	}
+
+}// end of OurDate class 
